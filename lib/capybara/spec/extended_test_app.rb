@@ -35,6 +35,10 @@ class ExtendedTestApp < TestApp#< Sinatra::Base
     current_request_info
   end
 
+  get '/set_cookie_and_redirect' do
+    response.set_cookie("clyde", "frog")
+    redirect "/"
+  end
 
   private
 

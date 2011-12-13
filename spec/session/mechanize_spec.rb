@@ -51,6 +51,11 @@ describe Capybara::Session do
       @session.body.should include("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_0) AppleWebKit/535.2 (KHTML, like Gecko) Chrome/15.0.853.0 Safari/535.2")
     end
 
+    it "should remember cookies" do
+      @session.visit("#{REMOTE_TEST_URL}/set_cookie_and_redirect")
+      @session.driver.browser.agent.cookies.find { |c| c.name == "clyde" }.value.should == "frog"
+    end
+
     it_should_behave_like "session"
     it_should_behave_like "session without javascript support"
     it_should_behave_like "session with headers support"
